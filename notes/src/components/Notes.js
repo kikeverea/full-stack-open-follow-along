@@ -1,13 +1,15 @@
-import Note from "./Note"
+import Note from './Note'
 
-const Notes = ({notes, toggleNoteImportance}) =>
-  <ul>
-    {notes.map(note => 
-      <Note key={note.id} 
-            note={note} 
-            toggleImportance={toggleNoteImportance}/>
+const Notes = ({ notes, toggleNoteImportance }) =>
+  <table>
+    <tbody>
+      {notes.map(note =>
+        <Note key={note.id}
+          note={note}
+          toggleImportance={toggleNoteImportance}/>
 
-    )}
-  </ul>
+      )}
+    </tbody>
+  </table>
 
 export default Notes

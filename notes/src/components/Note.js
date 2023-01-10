@@ -1,13 +1,15 @@
-const Note = ({ note , toggleImportance}) => {
-  const label = note.important ? 'make not important' : 'make important'  
+const Note = ({ note , toggleImportance }) => {
+  const label = note.important ? 'make not important' : 'make important'
   return (
-      <li>
-        {note.content} 
-        <button onClick={()=> toggleImportance(note.id)}>
+    <tr>
+      <td>{note.content}</td>
+      <td>
+        <button onClick={() => toggleImportance(note.id)}>
           {label}
-        </button>  
-      </li>
-    )
-  }
-  
-  export default Note
+        </button>
+      </td>
+    </tr>
+  )
+}
+
+export default Note
