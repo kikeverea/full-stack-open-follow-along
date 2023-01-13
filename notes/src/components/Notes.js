@@ -1,15 +1,37 @@
-import Note from './Note'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleImportanceOf } from '../reducers/noteReducer'
+const Note = ({ note, handleClick }) => {
+  return(
+    <li onClick={handleClick}>
+      {note.content}
+      <strong> {note.important ? 'important' : ''}</strong>
+    </li>
+  )
+}
 
-const Notes = ({ notes, toggleNoteImportance }) =>
-  <table>
-    <tbody>
+const Notes = () => {
+  const dispatch = useDispatch()
+  const notes = useSelector(({ filter, notes }) =>
+    filter === 'ALL'
+      ? notes
+      : filter === 'IMPORTANT'
+        ? notes.filter(note => note.important)
+        : notes.filter(note => !note.important)
+  )
+
+  return(
+    <ul>
       {notes.map(note =>
-        <Note key={note.id}
+        <Note
+          key={note.id}
           note={note}
-          toggleImportance={toggleNoteImportance}/>
-
+          handleClick={() =>
+            dispatch(toggleImportanceOf(note.id))
+          }
+        />
       )}
-    </tbody>
-  </table>
+    </ul>
+  )
+}
 
 export default Notes
